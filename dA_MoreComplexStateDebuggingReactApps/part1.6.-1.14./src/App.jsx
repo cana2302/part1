@@ -19,26 +19,33 @@ const Statistics = ({good, neutral, bad}) => {
   )
 }
 
+const NoStatistics = () => {
+  return (
+    <p>No feedback given</p>
+  )
+}
+
 const App = () => {
 
   //guarda los clics de cada botón en su propio estado
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
+  const [showStatistics, setShowStatistics] = useState(false);
 
   const clickGood = () => {
     setGood(good + 1);
-    console.log(good);
+    setShowStatistics(true);
   }
 
   const clickNeutral = () => {
     setNeutral(neutral + 1);
-    console.log(neutral);
+    setShowStatistics(true);
   }
 
   const clickBad = () => {
     setBad(bad + 1);
-    console.log(bad);
+    setShowStatistics(true);
   }
 
   return (
@@ -48,8 +55,7 @@ const App = () => {
       <button onClick={clickNeutral}>Neutral</button>
       <button onClick={clickBad}>Bad</button>
 
-      <Statistics good={good} neutral={neutral} bad={bad}></Statistics>
-
+      {showStatistics ? <Statistics good={good} neutral={neutral} bad={bad} /> : <NoStatistics />}
     </div>
   )
 }
