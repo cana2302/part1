@@ -12,6 +12,7 @@ const App = () => {
     'The only way to go fast, is to go well.'
   ]
 
+  //Hook anecdote
   const [selected, setSelected] = useState(0)
 
   const next_anecdote = () => {
@@ -22,6 +23,7 @@ const App = () => {
     setSelected(number);
   }
 
+  //Hook points
   const [point, setPoint] = useState(Array(anecdotes.length).fill(0))
   
   const make_vote = () => {
@@ -31,13 +33,26 @@ const App = () => {
   };
 
   const vote = point[selected];
+
+  //Find anecdote with most vote
+  let maxIndex = 0;
+  let maxValue = point[0];
+  for (let i = 1; i < point.length; i++) {
+    if (point[i] > maxValue) {
+      maxValue = point[i];
+      maxIndex = i;
+    }
+  }
   
   return (
     <div>
+      <h3>Anecdote of the day</h3>
       <p>{anecdotes[selected]}</p>
       <p>Has {vote} votes</p>
       <button onClick={make_vote}>Vote</button>
       <button onClick={next_anecdote}>Next anecdote</button>
+      <h3>Anecdote with most votes</h3>
+      <p>{anecdotes[maxIndex]}</p>
     </div>
   )
 }
