@@ -19,13 +19,24 @@ const App = () => {
       return Math.floor(Math.random() * (max-min + 1)) +min;
     }
     const number = random_num(0,((anecdotes.length)-1));
-    console.log(number);
     setSelected(number);
   }
+
+  const [point, setPoint] = useState(Array(anecdotes.length).fill(0))
+  
+  const make_vote = () => {
+    const copy = [...point]
+    copy[selected] = (copy[selected] + 1);
+    setPoint(copy);
+  };
+
+  const vote = point[selected];
   
   return (
     <div>
       <p>{anecdotes[selected]}</p>
+      <p>Has {vote} votes</p>
+      <button onClick={make_vote}>Vote</button>
       <button onClick={next_anecdote}>Next anecdote</button>
     </div>
   )
