@@ -1,20 +1,30 @@
 import { useState } from 'react'
 
-const Statistics = ({good, neutral, bad}) => {
+const BottonFeedback = (props) => {
+  return (
+    <button onClick={props.click}>{props.feedback}</button>
+  )
+}
 
-  const all = (good + neutral + bad);
-  const average = (((good*1)+(neutral*0)+(bad*(-1)))/all);
-  const positive_feedback = ((good*100)/all);
+const StatisticLine = (props) => {
+  return (
+    <p>{props.text}: {props.value}</p>
+  )
+}
 
+const Statistics = (props) => {
+  const all = (props.good + props.neutral + props.bad);
+  const average = (((props.good*1)+(props.neutral*0)+(props.bad*(-1))) /all);
+  const positive_feedback = ((props.good*100)/all) + " %";
   return(
     <>
       <h4>Statics</h4>
-      <p>Good: {good}</p>
-      <p>Neutral: {neutral}</p>
-      <p>Bad: {bad}</p>
-      <p>All: {all}</p>
-      <p>Average: {average}</p>
-      <p>Positive: {positive_feedback} %</p>
+      <StatisticLine text="Good" value={props.good} />
+      <StatisticLine text="Neutral" value={props.neutral} />
+      <StatisticLine text="Bad" value={props.bad} />
+      <StatisticLine text="All" value={all} />
+      <StatisticLine text="Average" value={average} />
+      <StatisticLine text="Positive" value={positive_feedback} />
     </>
   )
 }
@@ -26,8 +36,6 @@ const NoStatistics = () => {
 }
 
 const App = () => {
-
-  //guarda los clics de cada botón en su propio estado
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
@@ -51,9 +59,9 @@ const App = () => {
   return (
     <div>
       <h3>Give Feedback</h3>
-      <button onClick={clickGood}>Good</button>
-      <button onClick={clickNeutral}>Neutral</button>
-      <button onClick={clickBad}>Bad</button>
+      <BottonFeedback click={clickGood} feedback="Good" />
+      <BottonFeedback click={clickNeutral} feedback="Neutral" />
+      <BottonFeedback click={clickBad} feedback="Bad" />
 
       {showStatistics ? <Statistics good={good} neutral={neutral} bad={bad} /> : <NoStatistics />}
     </div>
