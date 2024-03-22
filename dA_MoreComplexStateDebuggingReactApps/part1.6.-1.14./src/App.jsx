@@ -8,7 +8,10 @@ const BottonFeedback = (props) => {
 
 const StatisticLine = (props) => {
   return (
-    <p>{props.text}: {props.value}</p>
+    <tr>
+      <td>{props.text}</td>
+      <td>{props.value}</td>
+    </tr>
   )
 }
 
@@ -19,12 +22,16 @@ const Statistics = (props) => {
   return(
     <>
       <h4>Statics</h4>
-      <StatisticLine text="Good" value={props.good} />
-      <StatisticLine text="Neutral" value={props.neutral} />
-      <StatisticLine text="Bad" value={props.bad} />
-      <StatisticLine text="All" value={all} />
-      <StatisticLine text="Average" value={average} />
-      <StatisticLine text="Positive" value={positive_feedback} />
+      <table>
+        <tbody>
+          <StatisticLine text="Good" value={props.good} />
+          <StatisticLine text="Neutral" value={props.neutral} />
+          <StatisticLine text="Bad" value={props.bad} />
+          <StatisticLine text="All" value={all} />
+          <StatisticLine text="Average" value={average} />
+          <StatisticLine text="Positive" value={positive_feedback} />
+        </tbody>
+      </table>
     </>
   )
 }
